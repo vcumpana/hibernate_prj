@@ -1,0 +1,5 @@
+package enums;
+
+public enum Role {
+    PROJECTMANAGER, DEVELOPER, TESTER, LEAD, SCRUMMASTER, ANALYST
+}
