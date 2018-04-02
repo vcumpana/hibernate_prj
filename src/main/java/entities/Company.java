@@ -2,15 +2,14 @@ package entities;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Data
 public class Company {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column
     private int id;
 

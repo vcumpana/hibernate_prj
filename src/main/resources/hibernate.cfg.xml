@@ -8,7 +8,7 @@
 
         <!-- List of configs -->
         <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
-        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/hibernate_projet_db</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/hb_db</property>
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.connection.password">pisscot</property>
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQL95Dialect</property>

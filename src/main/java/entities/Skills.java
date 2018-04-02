@@ -10,6 +10,7 @@ import javax.persistence.*;
 public class Skills {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "Id")
     private int id;
 

@@ -2,6 +2,7 @@ package entities;
 
 import enums.Role;
 import lombok.Data;
+import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
 
@@ -10,10 +11,12 @@ import javax.persistence.*;
 public class Employee {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column
     private int id;
 
     @Column
+    @NaturalId
     private String Userid;
 
     @Column(name = "First name")
@@ -26,7 +29,8 @@ public class Employee {
     private int skills;
 
     @Column(name = "Address")
-    private int address;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Address address;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "Role")
