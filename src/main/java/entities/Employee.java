@@ -18,7 +18,7 @@ public class Employee {
 
    // @Column
     @NaturalId
-    private String Userid;
+    private String userId;
 
 
     private String firstName;
@@ -27,7 +27,7 @@ public class Employee {
     private String lastName;
 
 
-    @ManyToMany()
+    @ManyToMany
     private Set<Skills> skills;
 
 
@@ -38,4 +38,12 @@ public class Employee {
   //  @Column(name = "Role")
     private Role role;
 
+    public Employee(String userid, String firstName, String lastName, Set<Skills> skills, Address address, Role role) {
+        this.userId = userid;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.skills = skills;
+        this.address = address;
+        this.role = role;
+    }
 }

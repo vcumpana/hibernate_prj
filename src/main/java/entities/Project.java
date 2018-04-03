@@ -11,6 +11,8 @@ import java.util.Set;
 @Entity
 public class Project {
 
+
+
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -18,16 +20,23 @@ public class Project {
 
     @Column
     @NaturalId
-    private String ProjectCode;
+    private String projectCode;
 
     @Column
-    private String Name;
+    private String name;
 
     @Column
-    private String Description;
+    private String description;
 
 
     @ManyToMany
     private Set<Employee> employees;
 
+
+    public Project(String projectCode, String name, String description, Set<Employee> employees) {
+        this.projectCode = projectCode;
+        this.name = name;
+        this.description = description;
+        this.employees = employees;
+    }
 }

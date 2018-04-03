@@ -9,6 +9,8 @@ import java.util.Set;
 @Data
 public class Company {
 
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column
@@ -22,4 +24,11 @@ public class Company {
 
     @ManyToMany
     private Set<Employee> employees;
+
+
+    public Company(String name, Set<Project> projects, Set<Employee> employees) {
+        Name = name;
+        this.projects = projects;
+        this.employees = employees;
+    }
 }

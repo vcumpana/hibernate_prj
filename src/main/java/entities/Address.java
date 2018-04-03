@@ -1,27 +1,16 @@
 package entities;
 
 import lombok.Data;
-import org.hibernate.annotations.Table;
-
 import javax.persistence.*;
 
-@Data
 @Entity
-//@Table(name = "Address")
+@Data
 public class Address {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "Id")
     private int id;
-
-    public Address(Country country, String city, String street, String strNumber) {
-        this.country = country;
-        this.city = city;
-        this.street = street;
-        this.strNumber = strNumber;
-    }
-
 
     @ManyToOne
     private Country country;
@@ -32,6 +21,14 @@ public class Address {
     @Column(name = "Street")
     private String street;
 
-    @Column(name = "Street number")
+    @Column(name = "Street_number")
     private String strNumber;
+
+
+    public Address(Country country, String city, String street, String strNumber) {
+        this.country = country;
+        this.city = city;
+        this.street = street;
+        this.strNumber = strNumber;
+    }
 }
