@@ -6,6 +6,7 @@ import enums.Role;
 import enums.SkillType;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import utils.HibernateUtils;
 
 import java.util.Arrays;
@@ -17,7 +18,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Session session = HibernateUtils.getSessionFactory().openSession();
+       // Session session = HibernateUtils.getSessionFactory().openSession();
         Employee employee = new Employee();
         employee.setUserid("oiouo6546");
         employee.setFirstName("Michael");
@@ -30,16 +31,19 @@ public class Main {
         employee.setAddress(address);
         employee.setRole(Role.ANALYST);
 
-       // insertEmployee(employee);
+        insertEmployee(country);
 
 
-        session.close();
+     //   session.close();
 
     }
 
-    public static void insertEmployee(Employee employee){
+    public static void insertEmployee(Country employee){
         Session session  = HibernateUtils.getSessionFactory().openSession();
+        Transaction t=session.beginTransaction();
+        t.begin();
         session.save(employee);
+        t.commit();
         session.close();
     }
 }
