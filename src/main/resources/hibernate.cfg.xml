@@ -9,12 +9,12 @@
         <!-- List of configs -->
         <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
         <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/hb_db</property>
-        <property name="hibernate.connection.username">root</property>
-        <property name="hibernate.connection.password">pisscot</property>
+        <property name="hibernate.connection.username">postgres</property>
+        <property name="hibernate.connection.password">Academy_372686</property>
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQL95Dialect</property>
-        <property name="hibernate.hbm2ddl.auto">create</property>
+        <property name="hibernate.hbm2ddl.auto">create-drop</property>
         <property name="hibernate.show_sql">true</property>
-        <property name="format_sql">true</property>
+
 
         <!-- List of class mappings -->
         <mapping class="entities.Company"/>

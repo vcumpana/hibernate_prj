@@ -3,6 +3,7 @@ package entities;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Data
@@ -16,9 +17,9 @@ public class Company {
     @Column
     private String Name;
 
-    @Column
-    private int Projects;
+    @OneToMany
+    private Set<Project> projects;
 
-    @Column
-    private int Employees;
+    @ManyToMany
+    private Set<Employee> employees;
 }

@@ -20,4 +20,9 @@ public class Country {
 
     @Column(name = "Name")
     private String name;
+
+    public Country(String code, String name) {
+        isoCode = code;
+        this.name = name;
+    }
 }

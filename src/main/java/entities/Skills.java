@@ -20,4 +20,9 @@ public class Skills {
 
     @Column(name = "Skill")
     private String skill;
+
+    public Skills(SkillType skillType, String skill){
+        this.type = skillType;
+        this.skill = skill;
+    }
 }

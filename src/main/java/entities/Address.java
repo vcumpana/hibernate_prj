@@ -15,8 +15,16 @@ public class Address {
     @Column(name = "Id")
     private int id;
 
-    @Column(name = "Country")
-    private int countryId;
+    public Address(Country country, String city, String street, String strNumber) {
+        this.country = country;
+        this.city = city;
+        this.street = street;
+        this.strNumber = strNumber;
+    }
+
+
+    @ManyToOne
+    private Country country;
 
     @Column(name = "City")
     private String city;

@@ -5,6 +5,7 @@ import lombok.Data;
 import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Data
 @Entity
@@ -25,7 +26,8 @@ public class Project {
     @Column
     private String Description;
 
-    @Column
-    private int Employees;
+
+    @ManyToMany
+    private Set<Employee> employees;
 
 }
