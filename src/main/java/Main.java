@@ -1,14 +1,14 @@
 import dao.DaoImplementaion;
-import dao.ToDatabase;
 import entities.*;
 import enums.Role;
 import enums.SkillType;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import utils.HibernateUtils;
 
 import java.util.*;
+
+import static enums.Status.*;
 
 public class Main {
 
@@ -71,6 +71,30 @@ public class Main {
             System.out.println(e.getName() + " " + e.getProjectCode());
         printSeparator();
 
+        List<Employee> allEmployees = dao.allFomDatabase(new Employee());
+        for (Employee e: allEmployees)
+            System.out.println(e.getFirstName() + " " + e.getLastName() + " " + e.getStatus());
+        for(int i = 0; i < 3; i++){
+            dao.deleteObject(allEmployees.get(i));
+        }
+
+        List<Employee> allActiveAndInactiveEmployees = dao.allFomDatabase(new Employee());
+        for (Employee e: allActiveAndInactiveEmployees)
+            System.out.println(e.getFirstName() + " " + e.getLastName() + " " + e.getStatus());
+        printSeparator();
+
+        List<Project> allProjects = dao.allFomDatabase(new Project());
+        for (Project e: allProjects)
+            System.out.println(e.getName() + " " + e.getStatus());
+        for(int i = 0; i < 2; i++){
+            dao.deleteObject(allProjects.get(i));
+        }
+
+        List<Project> allActiveAndInactiveProjects = dao.allFomDatabase(new Project());
+        for (Project e: allActiveAndInactiveProjects)
+            System.out.println(e.getName() + " " + e.getStatus());
+        printSeparator();
+
     }
 
     private static List<Company> companiesFactory(List<Project> projects, List<Employee> employees) {
@@ -82,13 +106,13 @@ public class Main {
     private static List<Project> projectsFactory(List<Employee> employees) {
         List<Project> list = new ArrayList<>();
         list.add(new Project("PRJ_9879", "Online Shop", "Online book and gadgets shop"
-                , new HashSet<Employee>(Arrays.asList(employees.get(0), employees.get(1)))));
+                , new HashSet<Employee>(Arrays.asList(employees.get(0), employees.get(1))),ACTIVE ));
         list.add(new Project("PRJ_6578", "Travel App", "Mobile app for travelers"
-                , new HashSet<Employee>(Arrays.asList(employees.get(1), employees.get(2), employees.get(3), employees.get(4)))));
+                , new HashSet<Employee>(Arrays.asList(employees.get(1), employees.get(2), employees.get(3), employees.get(4))), ACTIVE ));
         list.add(new Project("PRJ_4546", "Video Channel", "Video channel for it enthusiasts"
-                , new HashSet<Employee>(Arrays.asList(employees.get(5)))));
+                , new HashSet<Employee>(Arrays.asList(employees.get(5))), ACTIVE));
         list.add(new Project("PRJ_2654", "Antivirus", "Antivirus program"
-                , new HashSet<Employee>(Arrays.asList(employees.get(6), employees.get(7)))));
+                , new HashSet<Employee>(Arrays.asList(employees.get(6), employees.get(7))), ACTIVE));
         return list;
 
     }
@@ -96,24 +120,23 @@ public class Main {
     private static List<Employee> employeesFactory(List<Address> addresses, List<Skills> skills) {
         List<Employee> list = new ArrayList<>();
         list.add(new Employee("icarag","Ion","Caragiale"
-                , new HashSet<>(Arrays.asList(skills.get(0), skills.get(3))), addresses.get(0),Role.DEVELOPER));
+                , new HashSet<>(Arrays.asList(skills.get(0), skills.get(3))), addresses.get(0),Role.DEVELOPER, ACTIVE));
         list.add(new Employee("mbatr","Mircea","Batrincea"
-                , new HashSet<>(Arrays.asList(skills.get(1), skills.get(3), skills.get(4))), addresses.get(2),Role.TESTER));
+                , new HashSet<>(Arrays.asList(skills.get(1), skills.get(3), skills.get(4))), addresses.get(2),Role.TESTER, ACTIVE));
         list.add(new Employee("pmitru","Pavel","Mitru"
-                , new HashSet<>(Arrays.asList(skills.get(2),skills.get(4))), addresses.get(3),Role.ANALYST));
+                , new HashSet<>(Arrays.asList(skills.get(2),skills.get(4))), addresses.get(3),Role.ANALYST, ACTIVE));
         list.add(new Employee("bmitri","Bogdan","Mitriuc"
-                , new HashSet<>(Arrays.asList(skills.get(1), skills.get(3), skills.get(4))), addresses.get(3),Role.SCRUMMASTER));
+                , new HashSet<>(Arrays.asList(skills.get(1), skills.get(3), skills.get(4))), addresses.get(3),Role.SCRUMMASTER, ACTIVE));
         list.add(new Employee("solesh","Svyatoslav","Oleshko"
-                , new HashSet<>(Arrays.asList(skills.get(0), skills.get(2), skills.get(4))), addresses.get(4),Role.PROJECTMANAGER));
+                , new HashSet<>(Arrays.asList(skills.get(0), skills.get(2), skills.get(4))), addresses.get(4),Role.PROJECTMANAGER, ACTIVE));
         list.add(new Employee("rsribn","Roman","Sribnyy"
-                , new HashSet<>(Arrays.asList(skills.get(0), skills.get(1))), addresses.get(5),Role.TESTER));
+                , new HashSet<>(Arrays.asList(skills.get(0), skills.get(1))), addresses.get(5),Role.TESTER, ACTIVE));
         list.add(new Employee("aivan","Alexey","Ivanov"
-                , new HashSet<>(Arrays.asList(skills.get(0))), addresses.get(6),Role.DEVELOPER));
+                , new HashSet<>(Arrays.asList(skills.get(0))), addresses.get(6),Role.DEVELOPER, ACTIVE));
         list.add(new Employee("ianast","Ivan","Anastasiev"
-                , new HashSet<>(Arrays.asList(skills.get(2), skills.get(3))), addresses.get(7),Role.ANALYST));
+                , new HashSet<>(Arrays.asList(skills.get(2), skills.get(3))), addresses.get(7),Role.ANALYST, ACTIVE));
         list.add(new Employee("bkagu","Boris","Kagudin"
-                , new HashSet<>(Arrays.asList(skills.get(0), skills.get(3), skills.get(1), skills.get(2))), addresses.get(8),Role.LEAD));
-
+                , new HashSet<>(Arrays.asList(skills.get(0), skills.get(3), skills.get(1), skills.get(2))), addresses.get(8),Role.LEAD, ACTIVE));
         return list;
     }
 

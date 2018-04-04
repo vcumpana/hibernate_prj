@@ -7,7 +7,7 @@ import javax.persistence.*;
 
 @Entity
 @Data
-//@NoArgsConstructor
+@NoArgsConstructor
 public class Address {
 
     @Id
@@ -26,8 +26,6 @@ public class Address {
 
     @Column(name = "Street_number")
     private String strNumber;
-
-    public Address(){}
 
     public Address(Country country, String city, String street, String strNumber) {
         this.country = country;

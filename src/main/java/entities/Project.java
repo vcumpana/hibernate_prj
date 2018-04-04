@@ -1,9 +1,10 @@
 package entities;
 
-import com.oracle.webservices.internal.api.databinding.DatabindingMode;
+import enums.Status;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.NaturalId;
+import org.hibernate.annotations.SQLDelete;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -11,9 +12,8 @@ import java.util.Set;
 @Data
 @Entity
 @NoArgsConstructor
+@SQLDelete(sql = "UPDATE Project SET status = 'INACTIVE' where id = ?")
 public class Project {
-
-
 
     @Id
     @Column
@@ -30,15 +30,17 @@ public class Project {
     @Column
     private String description;
 
-
     @ManyToMany
     private Set<Employee> employees;
 
+    @Enumerated(EnumType.STRING)
+    private Status status;
 
-    public Project(String projectCode, String name, String description, Set<Employee> employees) {
+    public Project(String projectCode, String name, String description, Set<Employee> employees, Status status) {
         this.projectCode = projectCode;
         this.name = name;
         this.description = description;
         this.employees = employees;
+        this.status = status;
     }
 }

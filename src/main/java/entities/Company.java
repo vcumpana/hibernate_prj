@@ -11,8 +11,6 @@ import java.util.Set;
 @NoArgsConstructor
 public class Company {
 
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column
@@ -26,7 +24,6 @@ public class Company {
 
     @ManyToMany
     private Set<Employee> employees;
-
 
     public Company(String name, Set<Project> projects, Set<Employee> employees) {
         Name = name;

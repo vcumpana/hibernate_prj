@@ -11,7 +11,7 @@ import utils.HibernateUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DaoImplementaion implements ToDatabase {
+public class DaoImplementaion implements AllFromOrToDatabase {
 
     private static SessionFactory sessionFactory = HibernateUtils.getSessionFactory();
 
@@ -149,7 +149,21 @@ public class DaoImplementaion implements ToDatabase {
         return list;
     }
 
-
+    public void deleteObject(Object object){
+        Session s = null;
+        Transaction t = null;
+        try {
+            s = sessionFactory.openSession();
+            t = s.beginTransaction();
+            s.delete(object);
+            t.commit();
+        } catch (Exception e) {
+            t.rollback();
+        } finally {
+            if (s != null)
+                s.close();
+        }
+    }
 
 
 }
