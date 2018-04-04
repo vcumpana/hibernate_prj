@@ -12,15 +12,13 @@ import java.util.*;
 
 public class Main {
 
-
     private static DaoImplementaion dao = new DaoImplementaion();
+
     public static void main(String[] args) {
 
         List<Country> countries = countryFactory();
         dao.toDatabase(countries);
-      //  dao.addCountry(countries);
         List<Skills> skills = skillsFactory();
-       // dao.addSkills(skills);
         dao.toDatabase(skills);
         List<Address> addresses = addressesFactory(countries);
         dao.toDatabase(addresses);
@@ -31,14 +29,54 @@ public class Main {
         List<Company> companies = companiesFactory(projects, employees);
         dao.toDatabase(companies);
 
+        printSeparator();
+        List<Employee> list= dao.getEmployeesByProjectCode("PRJ_9879");
+        System.out.println("Employee on project PRJ_9879");
+        for (Employee e : list){
+            System.out.println(e);
+        }
+        printSeparator();
+        List<Project> prList = dao.getProjectsByCompanyId(30);
+        System.out.println("Projects of company with id = 30");
+        for (Project e : prList)
+            System.out.println(e.getName());
+
+        printSeparator();
+        List<Employee> empBySkill= dao.getEmployeesBySkillType(SkillType.SOFT);
+        System.out.println("Employee with soft skills");
+        for (Employee e : empBySkill){
+            System.out.println(e);
+        }
+
+        printSeparator();
+        List<Employee> empBySkillName= dao.getEmployeesBySkillName("presentation");
+        System.out.println("Employee with presentation skills");
+        for (Employee e : empBySkillName){
+            System.out.println(e);
+        }
+
+        printSeparator();
+        Employee employee = dao.getEmployeeById(19).get(0);
+        System.out.println(employee);
+        employee.setFirstName("Updated");
+        employee.setLastName("Updated");
+        dao.updateEmployee(employee);
+        Employee updatedEmployee = dao.getEmployeeById(19).get(0);
+        System.out.println(updatedEmployee);
+
+        printSeparator();
+        List<Project> prListBySkills = dao.getProjectsByJavaSkilledEmployees();
+        System.out.println("Projects with 4 java skilled employees");
+        for (Project e : prListBySkills)
+            System.out.println(e.getName() + " " + e.getProjectCode());
+        printSeparator();
+
     }
 
     private static List<Company> companiesFactory(List<Project> projects, List<Employee> employees) {
         List<Company> list = new ArrayList<>();
         list.add(new Company("Endava", new HashSet<>(projects), new HashSet<>(employees)));
-
         return list;
-
     }
 
     private static List<Project> projectsFactory(List<Employee> employees) {
@@ -46,13 +84,11 @@ public class Main {
         list.add(new Project("PRJ_9879", "Online Shop", "Online book and gadgets shop"
                 , new HashSet<Employee>(Arrays.asList(employees.get(0), employees.get(1)))));
         list.add(new Project("PRJ_6578", "Travel App", "Mobile app for travelers"
-                , new HashSet<Employee>(Arrays.asList(employees.get(2), employees.get(3), employees.get(4)))));
+                , new HashSet<Employee>(Arrays.asList(employees.get(1), employees.get(2), employees.get(3), employees.get(4)))));
         list.add(new Project("PRJ_4546", "Video Channel", "Video channel for it enthusiasts"
                 , new HashSet<Employee>(Arrays.asList(employees.get(5)))));
         list.add(new Project("PRJ_2654", "Antivirus", "Antivirus program"
                 , new HashSet<Employee>(Arrays.asList(employees.get(6), employees.get(7)))));
-
-
         return list;
 
     }
@@ -62,13 +98,13 @@ public class Main {
         list.add(new Employee("icarag","Ion","Caragiale"
                 , new HashSet<>(Arrays.asList(skills.get(0), skills.get(3))), addresses.get(0),Role.DEVELOPER));
         list.add(new Employee("mbatr","Mircea","Batrincea"
-                , new HashSet<>(Arrays.asList(skills.get(1), skills.get(3))), addresses.get(2),Role.TESTER));
+                , new HashSet<>(Arrays.asList(skills.get(1), skills.get(3), skills.get(4))), addresses.get(2),Role.TESTER));
         list.add(new Employee("pmitru","Pavel","Mitru"
-                , new HashSet<>(Arrays.asList(skills.get(2))), addresses.get(3),Role.ANALYST));
+                , new HashSet<>(Arrays.asList(skills.get(2),skills.get(4))), addresses.get(3),Role.ANALYST));
         list.add(new Employee("bmitri","Bogdan","Mitriuc"
-                , new HashSet<>(Arrays.asList(skills.get(1), skills.get(3))), addresses.get(3),Role.SCRUMMASTER));
+                , new HashSet<>(Arrays.asList(skills.get(1), skills.get(3), skills.get(4))), addresses.get(3),Role.SCRUMMASTER));
         list.add(new Employee("solesh","Svyatoslav","Oleshko"
-                , new HashSet<>(Arrays.asList(skills.get(0), skills.get(2))), addresses.get(4),Role.PROJECTMANAGER));
+                , new HashSet<>(Arrays.asList(skills.get(0), skills.get(2), skills.get(4))), addresses.get(4),Role.PROJECTMANAGER));
         list.add(new Employee("rsribn","Roman","Sribnyy"
                 , new HashSet<>(Arrays.asList(skills.get(0), skills.get(1))), addresses.get(5),Role.TESTER));
         list.add(new Employee("aivan","Alexey","Ivanov"
@@ -118,6 +154,12 @@ public class Main {
         list.add(new Skills(SkillType.SOFT, "english" ));
         list.add(new Skills(SkillType.TECHNICAL, "testing" ));
         list.add(new Skills(SkillType.TECHNICAL, "programming" ));
+        list.add(new Skills(SkillType.TECHNICAL, "java" ));
+
         return list;
+    }
+
+    public static void printSeparator(){
+        System.out.println("----------------------------------------------------------------");
     }
 }

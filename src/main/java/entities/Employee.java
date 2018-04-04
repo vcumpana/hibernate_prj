@@ -2,6 +2,7 @@ package entities;
 
 import enums.Role;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
@@ -9,6 +10,7 @@ import java.util.Set;
 
 @Entity
 @Data
+@NoArgsConstructor
 public class Employee {
 
     @Id
@@ -26,10 +28,8 @@ public class Employee {
     //@Column(name = "Last name")
     private String lastName;
 
-
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private Set<Skills> skills;
-
 
     @OneToOne
     private Address address;

@@ -1,10 +1,13 @@
 package entities;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
 @Entity
 @Data
+//@NoArgsConstructor
 public class Address {
 
     @Id
@@ -24,6 +27,7 @@ public class Address {
     @Column(name = "Street_number")
     private String strNumber;
 
+    public Address(){}
 
     public Address(Country country, String city, String street, String strNumber) {
         this.country = country;

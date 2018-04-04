@@ -2,6 +2,7 @@ package entities;
 
 import com.oracle.webservices.internal.api.databinding.DatabindingMode;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
@@ -9,6 +10,7 @@ import java.util.Set;
 
 @Data
 @Entity
+@NoArgsConstructor
 public class Project {
 
 

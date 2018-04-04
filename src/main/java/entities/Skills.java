@@ -2,11 +2,13 @@ package entities;
 
 import enums.SkillType;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
 @Data
+@NoArgsConstructor
 public class Skills {
 
     @Id
