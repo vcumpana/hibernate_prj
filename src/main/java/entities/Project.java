@@ -33,6 +33,9 @@ public class Project {
     @ManyToMany
     private Set<Employee> employees;
 
+    @ManyToOne
+    private Company company;
+
     @Enumerated(EnumType.STRING)
     private Status status;
 

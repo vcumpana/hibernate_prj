@@ -19,13 +19,13 @@ public class Main {
         List<Country> countries = countryFactory();
         dao.toDatabase(countries);
         List<Skills> skills = skillsFactory();
-        dao.toDatabase(skills);
+        //dao.toDatabase(skills);
         List<Address> addresses = addressesFactory(countries);
-        dao.toDatabase(addresses);
+//        dao.toDatabase(addresses);
         List<Employee> employees = employeesFactory(addresses, skills);
         dao.toDatabase(employees);
         List<Project> projects = projectsFactory(employees);
-        dao.toDatabase(projects);
+      //  dao.toDatabase(projects);
         List<Company> companies = companiesFactory(projects, employees);
         dao.toDatabase(companies);
 
@@ -51,17 +51,18 @@ public class Main {
         printSeparator();
         List<Employee> empBySkillName= dao.getEmployeesBySkillName("presentation");
         System.out.println("Employee with presentation skills");
+        System.out.println(empBySkillName.get(0).getSkills().toString());
         for (Employee e : empBySkillName){
             System.out.println(e);
         }
 
         printSeparator();
-        Employee employee = dao.getEmployeeById(19).get(0);
+        Employee employee = dao.getEmployeeById(9).get(0);
         System.out.println(employee);
         employee.setFirstName("Updated");
         employee.setLastName("Updated");
         dao.updateEmployee(employee);
-        Employee updatedEmployee = dao.getEmployeeById(19).get(0);
+        Employee updatedEmployee = dao.getEmployeeById(9).get(0);
         System.out.println(updatedEmployee);
 
         printSeparator();
@@ -94,6 +95,8 @@ public class Main {
         for (Project e: allActiveAndInactiveProjects)
             System.out.println(e.getName() + " " + e.getStatus());
         printSeparator();
+
+      //  HibernateUtils.getSessionFactory().close();
 
     }
 

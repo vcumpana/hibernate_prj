@@ -19,7 +19,8 @@ public class Company {
     @Column
     private String Name;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "company_id")
     private Set<Project> projects;
 
     @ManyToMany

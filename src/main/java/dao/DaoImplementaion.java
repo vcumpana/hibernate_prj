@@ -81,8 +81,8 @@ public class DaoImplementaion implements AllFromOrToDatabase {
         try {
             s = sessionFactory.openSession();
             t = s.beginTransaction();
-            Query query  = s.createQuery("from Employee e join fetch e.skills s where s.skill =:skillName");
-            query.setString("skillName", skillName);
+            Query query  = s.createQuery("from Employee e join fetch e.skills");
+           // query.setString("skillName", skillName);
             list = query.list();
             t.commit();
         } catch (Exception e) {
