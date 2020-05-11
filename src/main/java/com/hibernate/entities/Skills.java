@@ -1,10 +1,15 @@
-package entities;
+package com.hibernate.entities;
 
-import enums.SkillType;
+import com.hibernate.enums.SkillType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
 
 @Entity
 @Data
@@ -14,7 +19,7 @@ public class Skills {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "Id")
-    private int id;
+    private Long id;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "Type")

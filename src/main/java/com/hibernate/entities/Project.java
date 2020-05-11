@@ -1,6 +1,6 @@
-package entities;
+package com.hibernate.entities;
 
-import enums.Status;
+import com.hibernate.enums.Status;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.NaturalId;
@@ -18,7 +18,7 @@ public class Project {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
 
     @Column
     @NaturalId
@@ -30,8 +30,11 @@ public class Project {
     @Column
     private String description;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "projects")
     private Set<Employee> employees;
+
+    @OneToOne
+    private Employee manager;
 
     @Enumerated(EnumType.STRING)
     private Status status;
@@ -40,7 +43,7 @@ public class Project {
         this.projectCode = projectCode;
         this.name = name;
         this.description = description;
-        this.employees = employees;
+      //  this.employees = employees;
         this.status = status;
     }
 }

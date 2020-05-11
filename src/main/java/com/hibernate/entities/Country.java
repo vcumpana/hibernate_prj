@@ -1,4 +1,4 @@
-package entities;
+package com.hibernate.entities;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,7 +14,7 @@ public class Country {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "Id")
-    private int id;
+    private Long id;
 
     @NaturalId
     @Column(name = "ISO_code")
